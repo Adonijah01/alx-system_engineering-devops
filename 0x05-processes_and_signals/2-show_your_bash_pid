@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This script displays lines containing the bash word to get the PID of the Bash process.
+
+# Disable shellcheck warning for the use of grep
+ps -ef | grep bash | grep -v grep
+
