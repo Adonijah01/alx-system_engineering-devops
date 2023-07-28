@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This script displays a list of currently running processes.
+
+# Use ps command with options to display the processes
+ps -ef --forest
+
