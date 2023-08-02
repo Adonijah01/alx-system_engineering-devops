@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Backup the original hosts file
+sudo cp /etc/hosts /etc/hosts.bak
+
+# Modify the hosts file
+sudo sed -i 's/localhost$/localhost\n127.0.0.2/' /etc/hosts
+sudo sed -i 's/facebook.com$/facebook.com\n8.8.8.8/' /etc/hosts
+
+echo "Hosts file updated. Now localhost resolves to 127.0.0.2 and facebook.com resolves to 8.8.8.8."
+
+# Reload networking service (not required in all cases, but useful to ensure changes take effect)
+sudo systemctl restart networking
+
