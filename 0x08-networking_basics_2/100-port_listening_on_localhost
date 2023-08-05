@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
+# listens on port 98 in localhost
 
-# listens on port 98 on local host
 nc -l 98
-
-#adonijah kiplimo
+#Adonijah kiplimo
