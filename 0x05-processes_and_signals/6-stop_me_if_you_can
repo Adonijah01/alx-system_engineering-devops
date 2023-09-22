@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# This script stops the 4-to_infinity_and_beyond process.
+
+# Find the PIDs of the 4-to_infinity_and_beyond processes using pgrep
+pids=$(pgrep -f "4-to_infinity_and_beyond")
+
+if [ -z "$pids" ]; then
+    echo "4-to_infinity_and_beyond process not found."
+else
+    # Iterate through the PIDs and suspend each process using SIGTSTP
+    for pid in $pids; do
+        kill -s SIGTSTP "$pid"
+    done
+
+    # Wait for a short period to ensure the processes are suspended
+    sleep 1
+
+    # Terminate the suspended processes using SIGTERM
+    for pid in $pids; do
+        kill -s SIGTERM "$pid"
+    done
+fi
+
