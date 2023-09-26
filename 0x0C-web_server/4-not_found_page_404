@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+# Install nginx on web-01 server with the following configurations:
+-------   Listens on port 80
+-------  Returns the page containing "hello world" when queried at the root
+
+# Configure /redirect_me as a "301 moved permanently"
+ 
+
+#Include  custom 404 page containiing "Ceci n'est pas une page"
+
+
+# Include a custom HTTP response header named X-served-By That will show the
+
+
+# the name of the server
+
+apt-get -y update
+
+apt-get -y install nginx
+
+mkdir /etc/nginx/html
+
+touch /etc/nginx/html/index.html
+
+
+
+echo "Hello World!" > /etc/nginx/html/index.html
+
+touch /etc/nginx/html/404.html
+
+echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
+
+
+
+printf %s "server{
+
+    listen 80;
+
+    listen [::]:80 default_server;
+
+    add_header X-Served-By $HOSTNAME;
+
+    root /etc/nginx/html;
+
+    index index.html index.htm;
+
+    location /redirect_me{
+
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+
+    }
+
+    error_page 404 /404.html;
+
+    location /404 {
+
+        root /etc/nginx/html;
+
+        internal;
+
+    }
+
+
+
+}" > /etc/nginx/sites-available/default
+
+
+
+service nginx restart
