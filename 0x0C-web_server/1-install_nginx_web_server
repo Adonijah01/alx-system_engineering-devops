@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-
-#install nginx in my web-01 server
-#listening on port 80
+# Install nginx on in my web-01 server
+# listening on port 80
 # When querying Nginx at its root / with a GET request (requesting a page) 
+#using curl
 
 apt-get -y update
 apt-get -y install nginx
