@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Install nginx on web-01 server with the following configurations:
--------   Listens on port 80
--------  Returns the page containing "hello world" when queried at the root
+#-------   Listens on port 80
+#-------  Returns the page containing "hello world" when queried at the root
 
 # Configure /redirect_me as a "301 moved permanently"
  
