@@ -35,7 +35,7 @@ listen hbnb
     option forwardfor
     server 329967-web-01 54.165.55.51:80 check
     server 329967-web-02 52.91.147.19:80 check
-" echo "backend web-backend" | sudo tee -a /etc/haproxy/haproxy.cfg
+" >> /etc/haproxy/haproxy.cfg
 
 
-service haproxy start
+sudo service haproxy restart
