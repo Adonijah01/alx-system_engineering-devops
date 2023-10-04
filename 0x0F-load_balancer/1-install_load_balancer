@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 #This script Installs and configures HAproxy on my lb-01 server.
 
+sudo apt-get update
 sudo apt-get install -y software-properties-common
 sudo add-apt-repository -y ppa:vbernat/haproxy-2.8
-sudo apt-get update
 sudo apt-get install -y haproxy=2.8.\*
 
 echo "ENABLED=1" >> /etc/default/haproxy
-mv /etc/haproxy/haproxy.cfg{,.original}
-touch /etc/haproxy/haproxy.cfg
+sudo mv /etc/haproxy/haproxy.cfg{,.original}
+sudo touch /etc/haproxy/haproxy.cfg
 
 sudo printf %s "global
     log 127.0.0.1 local0 notice
