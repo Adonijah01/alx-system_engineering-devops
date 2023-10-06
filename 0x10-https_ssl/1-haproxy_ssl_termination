@@ -1,0 +1,42 @@
+global
+    log 127.0.0.1 local0 notice
+    maxconn 2000
+    user haproxy
+    group haproxy
+
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    retries 3
+    option redispatch
+    timeout connect  5000
+    timeout client  10000
+    timeout server  10000
+
+frontend http_frontend
+    bind 0.0.0.0:80
+    mode http
+    stats enable
+    stats uri /haproxy?stats
+    option httpclose
+    option forwardfor
+    default_backend backend_servers
+
+frontend https_frontend
+    bind *:443 ssl crt  /etc/haproxy/certs/www.adonijahkiplimo.tech.pem
+    mode http
+    stats enable
+    stats uri /haproxy?stats
+    option httpclose
+    option forwardfor
+    http-request set-path /
+
+    default_backend backend_servers
+
+backend backend_servers
+    mode http
+    balance roundrobin
+    server 329967-web-01 54.165.55.51:80 check
+    server 329967-web-02 52.91.147.19:80 check
