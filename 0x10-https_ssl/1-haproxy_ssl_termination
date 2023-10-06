@@ -3,7 +3,6 @@ global
     maxconn 2000
     user haproxy
     group haproxy
-
 defaults
     log     global
     mode    http
@@ -14,18 +13,18 @@ defaults
     timeout connect  5000
     timeout client  10000
     timeout server  10000
-
 frontend http_frontend
     bind 0.0.0.0:80
     mode http
     stats enable
     stats uri /haproxy?stats
+    balance roundrobin
     option httpclose
     option forwardfor
-    default_backend backend_servers
+default_backend backend_servers
 
 frontend https_frontend
-    bind *:443 ssl crt  /etc/haproxy/certs/www.adonijahkiplimo.tech.pem
+    bind *:443 ssl crt  /etc/letsencrypt/live/www.adonijahkiplimo.tech/fullchain.pem
     mode http
     stats enable
     stats uri /haproxy?stats
@@ -40,3 +39,4 @@ backend backend_servers
     balance roundrobin
     server 329967-web-01 54.165.55.51:80 check
     server 329967-web-02 52.91.147.19:80 check
+
