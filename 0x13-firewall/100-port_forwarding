@@ -3,11 +3,6 @@ ssh ubuntu@54.165.55.51
 
 sudo vi /etc/ufw/before.rules
 
-*nat
-:PREROUTING ACCEPT [0:0]
--A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
-COMMIT
-
 sudo ufw enable
 
 sudo ufw reload
