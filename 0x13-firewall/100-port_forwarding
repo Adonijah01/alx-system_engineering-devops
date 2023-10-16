@@ -1,6 +1,5 @@
-#Commands to configure ufw to forward requests from port 8080 to port 80.
-web-01
-
+#Commands to configure ufw to forward requests from port 8080 to port 80
+ssh ubuntu@54.165.55.51
 sudo vi /etc/ufw/before.rules
 
 # lines to add on the configuration file.
