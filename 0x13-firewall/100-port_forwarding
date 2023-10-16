@@ -1,0 +1,16 @@
+#Commands to configure ufw to forward requests from port 8080 to port 80.
+web-01
+
+sudo vi /etc/ufw/before.rules
+
+# lines to add on the configuration file.
+*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+COMMIT
+
+sudo ufw enable
+
+sudo ufw reload
+
+sudo ufw status
