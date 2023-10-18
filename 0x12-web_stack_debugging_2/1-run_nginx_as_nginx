@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
-# Bash script that configures the container to accept new user
-chmod 644 / etc/nginx/nginx.conf
+#give permission
+chmod 644 /etc/nginx/nginx.conf
 
-sed - i "s/#user www-data/user nginx/" / etc/nginx/nginx.conf
+# Create new user nginx
+username="nginx"
 
-sed - i "s/80/8080/g" / etc/nginx/sites-available/default
+# check existence
+if ! id -u "$username" >/dev/null 2>&1; then
+    sudo useradd --system --no-create-home --shell /usr/sbin/nologin --comment "Nginx system user" --user-group "$username"
+fi
 
-sudo - u nginx service nginx restart
+# configure file nginx.conf
+sed -i "s/www-data/nginx/" /etc/nginx/nginx.conf
+
+# replace port 80 with 8080
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+
+#kill if apache is running
+pkill apache2
+
+#restsart nginx
+service nginx restart
