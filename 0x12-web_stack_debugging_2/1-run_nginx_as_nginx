@@ -1,23 +1,7 @@
 #!/usr/bin/env bash
-#give permission
-chmod 644 /etc/nginx/nginx.conf
+# Configures the web server to run Nginx as the nginx user listening on port 8080.
+sed - i "s/#user www-data/user nginx/" / etc/nginx/nginx.conf
+sed - i "s/80/8080/g" / etc/nginx/sites-available/default
+chmod 644 / etc/nginx/nginx.conf
 
-# Create new user nginx
-username="nginx"
-
-# check existence
-if ! id -u "$username" >/dev/null 2>&1; then
-    sudo useradd --system --no-create-home --shell /usr/sbin/nologin --comment "Nginx system user" --user-group "$username"
-fi
-
-# configure file nginx.conf
-sed -i "s/www-data/nginx/" /etc/nginx/nginx.conf
-
-# replace port 80 with 8080
-sed -i "s/80/8080/g" /etc/nginx/sites-available/default
-
-#kill if apache is running
-pkill apache2
-
-#restsart nginx
-service nginx restart
+sudo - u nginx service nginx start
