@@ -1,33 +1,33 @@
 #!/usr/bin/python3
+"""Python script to export data in the JSON format.."""
+
 import json
+
 import requests
-import sys
+
 
 if __name__ == "__main__":
-    if len(sys.argv) != 1:
-        sys.exit()
 
-    base_url = "https://jsonplaceholder.typicode.com"
+    url = "https://jsonplaceholder.typicode.com/"
 
-    # Fetch user data
-    users_response = requests.get(f"{base_url}/users")
-    users = users_response.json()
+    users = requests.get(url + "users").json()
 
-    all_user_data = {}
 
-    for user in users:
-        user_id = user["id"]
-        username = user["username"]
 
-        # Fetch tasks for the current user
-        tasks_response = requests.get(f"{base_url}/todos?userId={user_id}")
-        tasks = tasks_response.json()
+    with open("todo_all_employees.json", "w") as jsonfile:
 
-        user_tasks = [{"username": username, "task": task["title"],
-                       "completed": task["completed"]} for task in tasks]
+        json.dump({
 
-        all_user_data[user_id] = user_tasks
+            u.get("id"): [{
 
-    # Write the data to JSON file
-    with open("todo_all_employees.json", "w") as json_file:
-        json.dump(all_user_data, json_file)
+                "task": t.get("title"),
+
+                "completed": t.get("completed"),
+
+                "username": u.get("username")
+
+            } for t in requests.get(url + "todos",
+
+                                    params={"userId": u.get("id")}).json()]
+
+            for u in users}, jsonfile)
