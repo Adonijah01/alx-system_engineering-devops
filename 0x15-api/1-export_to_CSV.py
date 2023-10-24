@@ -5,9 +5,9 @@ This script fetches employee TODO :\
         list progress from a REST API and exports it in CSV.
 """
 
-import sys
-import requests
 import csv
+import requests
+import sys
 
 
 if __name__ == "__main__":
