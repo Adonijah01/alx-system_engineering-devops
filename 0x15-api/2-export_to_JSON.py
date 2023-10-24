@@ -5,10 +5,9 @@ This script fetches employee TODO list :\
         progress from a REST API and exports it in JSON format.
 Usage: python3 2-export_to_JSON.py <employee_ID>
 """
-
-import sys
-import requests
 import json
+import requests
+import sys
 
 if __name__ == "__main__":
 
