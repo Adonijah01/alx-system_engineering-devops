@@ -1,3 +1,3 @@
-Postmortem
+In software engineering, a postmortem, also known as a post-incident review or retrospective, is a structured analysis and documentation of a specific incident or outage that occurred within a software system or service. The primary purpose of a postmortem is to thoroughly understand what went wrong, why it happened, and how to prevent similar incidents from occurring in the future. The term "postmortem" is borrowed from the medical field, where it refers to an examination of a deceased body to determine the cause of death.
 
 ![Alt Text](https://www.freecodecamp.org/news/content/images/2020/11/untitled--3-.png)
