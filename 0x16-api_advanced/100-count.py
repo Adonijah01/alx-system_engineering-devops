@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """
-Count it!
+Count it script.
 """
 
 import requests
 from collections import Counter
+
 
 def count_words(subreddit, word_list, after=None, keyword_count=None):
     if keyword_count is None:
@@ -38,7 +39,8 @@ def count_words(subreddit, word_list, after=None, keyword_count=None):
                 # Makes arecursive call.
                 return count_words(subreddit, word_list, after_key, keyword_count)
             else:
-                sorted_counts = sorted(keyword_count.items(), key=lambda x: (-x[1], x[0]))
+                sorted_counts = sorted(
+                    keyword_count.items(), key=lambda x: (-x[1], x[0]))
                 for keyword, count in sorted_counts:
                     print(f'{keyword}: {count}')
         else:
@@ -46,8 +48,9 @@ def count_words(subreddit, word_list, after=None, keyword_count=None):
     except requests.exceptions.RequestException:
         print("No posts found")
 
+
 if __name__ == '__main__':
     subreddit = "programming"
-    word_list = ["java", "python", "javascript", "scala", "no_results_for_this_one"]
+    word_list = ["java", "python", "javascript",
+                 "scala", "no_results_for_this_one"]
     count_words(subreddit, word_list)
-
