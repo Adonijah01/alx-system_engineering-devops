@@ -23,24 +23,25 @@ def count_words(subreddit, word_list, after=None, keyword_count=None):
         response = requests.get(url, headers=headers)
         response.raise_for_status()
         data = response.json()
+
         # Checks if the data contains posts.
         if 'data' in data and 'children' in data['data']:
             # Extract and process the titles
             for post in data['data']['children']:
                 title = post['data']['title'].lower()
 
-                """counts the occurence of each word in a title"""
+                # Counts the occurrence of each word in a title
                 for keyword in word_list:
                     keyword_count[keyword] += title.count(keyword.lower())
 
             # Checks if there are more pages.
             after_key = data['data']['after']
             if after_key:
-                # Makes arecursive call.
+                # Makes a recursive call.
                 return count_words(subreddit, word_list, after_key, keyword_count)
             else:
                 sorted_counts = sorted(
-                    keyword_count.items(), key=lambda x: (-x[1], x[0]))
+                    keyword_count.items(), key=lambda x: (-x[1], x[0].lower()))
                 for keyword, count in sorted_counts:
                     print(f'{keyword}: {count}')
         else:
