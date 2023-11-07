@@ -18,7 +18,6 @@ def number_of_subscribers(subreddit):
         response = requests.get(url, headers=headers)
         response.raise_for_status()  # Raise an exception for HTTP errors
 
-        
         data = response.json()
 
         # Extract the number of subscribers from the JSON data
@@ -34,7 +33,7 @@ def number_of_subscribers(subreddit):
 
 
 if __name__ == '__main__':
-    
+
     subreddit = "cybersecurity"  # Replace with the subreddit you want to check
     subscribers = number_of_subscribers(subreddit)
     print(subscribers)
